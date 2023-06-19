@@ -13,7 +13,7 @@ import pathlib
 
 # Set up your Streamlit layout
 st.set_page_config(
-    page_title='NLP Individual Assignment',
+    page_title='EmoTune',
     layout='centered',
     page_icon="https://logospng.org/download/spotify/logo-spotify-icon-4096.png",
     initial_sidebar_state='auto'
