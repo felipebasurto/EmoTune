@@ -1,4 +1,4 @@
-# EmoTune
+![EmoTune](https://i.ibb.co/bWTrCwk/emotune.png)
 
 Generate Spotify playlists based on song lyrics' sentiment and genre.
 
