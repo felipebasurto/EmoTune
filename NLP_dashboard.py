@@ -4,6 +4,7 @@ from fastai.text.all import *
 import torch
 import nltk
 from nltk.corpus import stopwords
+from nltk.sentiment import vader
 from nltk.tokenize import word_tokenize
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import re
@@ -20,13 +21,12 @@ st.set_page_config(
 
 temp = pathlib.PosixPath
 pathlib.PosixPath = pathlib.WindowsPath
-sid = SentimentIntensityAnalyzer()
 df = pd.read_parquet("data/lyrics_and_sent.parquet")
 
 @st.cache_data
 def download_dicts():
     nltk.download('punkt')
-    nltk.downloader.download('vader_lexicon')
+    nltk.download('vader_lexicon')
     nltk.download('stopwords')
     
 @st.cache_data
@@ -101,6 +101,7 @@ def display_playlist(df):
 
 
 download_dicts()
+sid = SentimentIntensityAnalyzer()
 
 #############################################################
 
