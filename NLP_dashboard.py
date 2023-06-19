@@ -21,12 +21,12 @@ st.set_page_config(
 temp = pathlib.PosixPath
 pathlib.PosixPath = pathlib.WindowsPath
 sid = SentimentIntensityAnalyzer()
-nltk.download('vader_lexicon')
 df = pd.read_parquet("data/lyrics_and_sent.parquet")
 
 @st.cache_data
 def download_dicts():
     nltk.download('punkt')
+    nltk.download('vader_lexicon')
     nltk.download('stopwords')
     
 @st.cache_data
