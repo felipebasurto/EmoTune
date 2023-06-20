@@ -19,8 +19,10 @@ st.set_page_config(
     initial_sidebar_state='auto'
 )
 
-temp = pathlib.PosixPath
-pathlib.PosixPath = pathlib.WindowsPath
+if os.name == 'nt':  # Check if running on Windows
+    pathlib.Path = pathlib.WindowsPath
+
+
 df = pd.read_parquet("data/lyrics_and_sent.parquet")
 
 @st.cache_data
