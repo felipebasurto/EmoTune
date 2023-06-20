@@ -2,6 +2,10 @@
 
 Generate Spotify playlists based on song lyrics' sentiment and genre.
 
+---------------
+https://emotune.streamlit.app/
+--------------
+
 ## Project Summary
 
 ### Goal Definition
