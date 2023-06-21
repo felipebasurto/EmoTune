@@ -20,7 +20,7 @@ st.set_page_config(
 )
 
 if os.name == 'nt':  # Check if running on Windows
-    pathlib.Path = pathlib.WindowsPath
+    pathlib.Path = pathlib.PosixPath
 
 
 df = pd.read_parquet("data/lyrics_and_sent.parquet")
@@ -160,7 +160,7 @@ st.markdown(
 row1, row2, row3, row4 = st.columns(4)
 
 image_url7 = "https://www.hitzound.com/wp-content/uploads/2023/04/Post-Malone-Universal-music.jpg"
-album_name1 = "<b style='color: #F2F2F2; text-align: center; font-size: 25px; margin-top: 10px;'>Post Human</b>"
+album_name1 = "<b style='color: #F2F2F2; text-align: center; font-size: 25px; margin-top: 10px;'>Post Malone</b>"
 
 row1.markdown(
     f"""
@@ -225,22 +225,33 @@ st.header("Analyze your lyrics!")
 # Create a text input box
 lyrics = st.text_area("", placeholder="Enter your lyrics here:")
 
-processed_lyrcs = process_text(lyrics)
+# Insert custom CSS to center the button
+st.markdown("""
+    <style>
+        .stButton>button {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# Create button
+analyze_button = st.button("Analyze")
 
 model_cls = load_cls_model()
 
-# Predict on the clean data
-if processed_lyrcs:
+if lyrics or analyze_button:
+    processed_lyrcs = process_text(lyrics)
+
+    # Predict on the clean data
     genre = model_cls.predict(processed_lyrcs)[0]
     st.markdown(f"<h2 style='text-align: center; color: #1DB954;'>Predicted Genre: {genre}</h2>", unsafe_allow_html=True)
 
-    
     score = get_sentiment_score(processed_lyrcs)
     sentiment_type, color = map_sentiment_type(score)
     # Display the score and type
     st.markdown(f"<h2 style='text-align: center; color: {color};'>Sentiment Score: {score}</h2>", unsafe_allow_html=True)
     st.markdown(f"<h2 style='text-align: center; color: {color};'>Sentiment Type: {sentiment_type}</h2>", unsafe_allow_html=True)
-    
     
     st.markdown("<hr>", unsafe_allow_html=True)
 
